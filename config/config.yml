@@ -1,0 +1,8 @@
+watch_paths:
+  - ./test_folder
+
+hash_algorithm: sha256
+
+log_file: ./logs/fim.log
+
+scan_interval: 10
