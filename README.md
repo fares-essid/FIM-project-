@@ -1,7 +1,6 @@
 # FIM-project-
 
-Next-Level Improvements (VERY IMPORTANT)
-
+Next-Level Improvements
 Since you're doing cybersecurity, push it further:
 
 🔐Security upgrades
@@ -47,9 +46,7 @@ Since your current baseline only stores the hash (the fingerprint), you can't re
 
 🛠️ The Strategy: The "Shadow Vault"
 We will create a hidden directory (let's call it .vault). When we create the initial baseline, we will also copy every file into that vault.
-
 If a file is modified: We delete the tampered version and copy the original back from the vault.
-
 If a file is deleted: We grab the copy from the vault and put it back.
-
 If a new file is created: We delete it (since it wasn't part of the authorized baseline).
+

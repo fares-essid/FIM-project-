@@ -6,3 +6,5 @@ hash_algorithm: sha256
 log_file: ./logs/fim.log
 
 scan_interval: 10
+
+docker_compose_file: ./docker-compose.yml
