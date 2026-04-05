@@ -1,14 +1,9 @@
-import json
-import os
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-DB_FILE = "fim_db.json"
 
-def load_db():
-    if not os.path.exists(DB_FILE):
-        return {}
-    with open(DB_FILE, "r") as f:
-        return json.load(f)
-
-def save_db(db):
-    with open(DB_FILE, "w") as f:
-        json.dump(db, f, indent=4)
+DATABASE_URL = "postgresql://postgres:hashfiles@hashfiles:5432/hashfiles_db"
+engine = create_engine(DATABASE_URL)
+Base = declarative_base()
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

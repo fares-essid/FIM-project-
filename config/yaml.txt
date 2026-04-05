@@ -1,0 +1,42 @@
+
+Sans YAML : Ton collègue télécharge ton code, l'essaie, et ça plante chez lui parce qu'il n'a pas la bonne version de Python 
+ou qu'il manque un fichier. Tu ne le sais que quand il t'appelle pour râler.
+
+Avec YAML : Dès que tu push, GitHub devient ton "testeur robotisé". Il lit le fichier YAML, suit tes instructions 
+(installer Python, lancer le script) et te dit immédiatement : "Hé, ton code de hachage fonctionne (ou pas) sur une machine propre !"
+*
+2. L'image Ubuntu, c'est un conteneur ?
+Oui, techniquement, GitHub Actions utilise souvent des machines virtuelles (VM) très légères ou des conteneurs (comme Docker).
+Quand tu écris runs-on: ubuntu-latest, GitHub allume un petit ordinateur tout neuf sous Linux (Ubuntu) juste pour toi.
+Cet ordinateur est vide. C'est pour ça qu'on lui dit : "Installe Python" et "Récupère mon code".
+Une fois que ton script a fini de tourner, GitHub efface tout. La machine disparaît.
+Pourquoi on fait ça ?
+Parce que ta machine à toi est "polluée" (dans le bon sens) : tu as déjà tes bases de données, tes variables d'environnement, 
+tes librairies installées. Le serveur GitHub, lui, est neutre. Si ton code tourne sur le YAML, il tournera partout.
+En résumé : Le YAML est la recette de cuisine que tu donnes à GitHub pour qu'il puisse cuisiner (tester) ton code tout seul
+ à chaque fois que tu changes un truc.
+
+ yaml
+name: Validation du Code             # 1. Nom du workflow (visible sur GitHub)
+
+on: [push, pull_request]             # 2. Déclencheurs : quand on envoie du code
+
+jobs:                                # 3. Liste des tâches à accomplir
+  verification-hachage:              # Nom de la tâche spécifique
+    runs-on: ubuntu-latest           # 4. Le système (un serveur Linux gratuit)
+
+    steps:                           # 5. Étapes successives de la tâche
+      - uses: actions/checkout@v4    # Étape A : Copie ton code sur le serveur
+
+      - name: Installer Python       # Étape B : Prépare l'environnement
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Lancer le script       # Étape C : Exécute ton code de hachage
+        run: python mon_script.py
+
+
+Automatisation : Vous pouvez créer un fichier .github/workflows/main.yml pour que GitHub teste votre code automatiquement à chaque "push".
+Environnements : Vous pouvez avoir un config_dev.yml pour votre PC et un config_prod.yml pour le serveur réel.
+Lisibilité : Contrairement au JSON, le YAML autorise les commentaires (#), ce qui est indispensable pour expliquer les réglages à votre équipe.

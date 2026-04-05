@@ -1,1 +1,5 @@
 pyyaml
+hashlib
+watchdog
+os 
+time
