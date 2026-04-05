@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+  image: postgres:latest
+  container_name: hash_files
+  environment :
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: hashfiles
+    POSTGRES_DB: hashfiles_db
+  ports :
+    - "5432:5432"
+
+#  The App Service (fim_app)
+# build: .: This tells Docker to look for a file named Dockerfile in your current folder to 
+# "bake" your Python code into an image.
+
+# volumes: This is critical for your FIM.
+
+# The first part (/path/to/monitor) is the folder on your Debian server you want to watch.
+
+# The second part (/app/target_dir) is how that folder appears inside the container.
+
+# :ro stands for Read-Only. Since your FIM is recording interactions, the container 
+# shouldn't be allowed to delete the files it's watching!
+
+# depends_on: Tells Docker to start the database before starting your code.
+
+# DB_HOST: db: This is the magic of Docker networking. You don't use an IP address. 
+# You just use the name of the service (db)
+# , and Docker handles the connection
