@@ -75,5 +75,3 @@ Avantages de cette méthode
 Isolation : Les fichiers de restauration ne polluent pas l'arborescence système de votre serveur Debian.
 Portabilité : En utilisant des volumes nommés, vous pouvez plus facilement déplacer l'ensemble de votre "stack" vers un autre serveur sans vous soucier des chemins de fichiers absolus sur l'hôte.
 Automatisation : Vous pouvez programmer ce troisième conteneur pour qu'il prenne des instantanés (snapshots) de manière autonome via un cron interne. 
-
-Souhaitez-vous un exemple de fichier Docker Compose pour configurer ces volumes partagés entre vos trois conteneurs ?
